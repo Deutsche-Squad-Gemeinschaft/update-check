@@ -25,6 +25,7 @@ jobs:
       with:
         workflow: UpdateMapRotation
         repo: Deutsche-Squad-Gemeinschaft/gists
+        ref: refs/heads/master
         token: ${{ secrets.PERSONAL_TOKEN }}
     - name: Commit & Push updated file
       if: steps.updatecheck.outputs.found == 'Update found.'
