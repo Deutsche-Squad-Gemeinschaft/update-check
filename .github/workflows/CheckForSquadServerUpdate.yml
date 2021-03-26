@@ -33,5 +33,3 @@ jobs:
         author_name: DSG-SquadServer Update-Bot
         author_email: privat@skyraptor.eu
         message: 'Updated lastCreated depot cache'
-      env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
