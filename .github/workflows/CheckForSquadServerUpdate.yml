@@ -7,13 +7,13 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup python
-      uses: actions/setup-python@v2
     - name: Pull repository
       uses: actions/checkout@v2
       with:
         repository: Deutsche-Squad-Gemeinschaft/gists
         token: ${{ github.token }}
+    - name: Setup python
+      uses: actions/setup-python@v2
     - name: Install SteamPython
       run: python -m pip --disable-pip-version-check install -Uq steam[client]
     - name: Check for updates
@@ -34,5 +34,4 @@ jobs:
         author_email: privat@skyraptor.eu
         message: 'Updated lastCreated depot cache'
       env:
-        # This is necessary in order to push a commit to the repo
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
