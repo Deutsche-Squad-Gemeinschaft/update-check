@@ -33,3 +33,6 @@ jobs:
         author_name: DSG-SquadServer Update-Bot
         author_email: privat@skyraptor.eu
         message: 'Updated lastCreated depot cache'
+      env:
+          # This is necessary in order to push a commit to the repo
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
