@@ -1,2 +1,2 @@
-# update-check
-Just a small repo to execute actions and check for updates
+# GitHub Actions
+Just a small repo to execute actions without creatin an AWS worker
