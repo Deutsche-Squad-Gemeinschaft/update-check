@@ -24,7 +24,7 @@ jobs:
       run: echo ::set-output name=found::$(python ./.github/CheckForSquadServerUpdate.py)
       
     - name: Dispatch UpdateSquadServerData workflow
-      if: steps.updatecheck.outputs.found == 'Update found.' && ! test -f "tmp/UpdateSquadServerData"
+      if: steps.updatecheck.outputs.found == 'Update found.' && ${{! test -f "tmp/UpdateSquadServerData"}}
       uses: benc-uk/workflow-dispatch@v1
       with:
         workflow: UpdateSquadServerData
