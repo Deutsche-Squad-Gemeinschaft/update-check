@@ -2,7 +2,7 @@ name: CheckForSquadServerUpdate
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/5 * * * *"
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
@@ -12,24 +12,21 @@ jobs:
       with:
         repository: Deutsche-Squad-Gemeinschaft/gists
         token: ${{ secrets.PERSONAL_TOKEN }}
+        
     - name: Setup python
       uses: actions/setup-python@v2
+      
     - name: Install SteamPython
       run: python -m pip --disable-pip-version-check install -Uq steam[client]
+      
     - name: Check for updates
       id: updatecheck
       run: echo ::set-output name=found::$(python ./.github/CheckForSquadServerUpdate.py)
-    - name: Dispatch UpdateMapRotation workflow
-      if: steps.updatecheck.outputs.found == 'Update found.'
+      
+    - name: Dispatch UpdateSquadServerData workflow
+      if: steps.updatecheck.outputs.found == 'Update found.' && ! test -f "tmp/UpdateSquadServerData"
       uses: benc-uk/workflow-dispatch@v1
       with:
-        workflow: UpdateMapRotation
+        workflow: UpdateSquadServerData
         repo: Deutsche-Squad-Gemeinschaft/gists
         token: ${{ secrets.PERSONAL_TOKEN }}
-    - name: Commit & Push updated file
-      if: steps.updatecheck.outputs.found == 'Update found.'
-      uses: EndBug/add-and-commit@v7
-      with:
-        author_name: DSG-SquadServer Update-Bot
-        author_email: privat@skyraptor.eu
-        message: 'Updated lastCreated depot cache'
